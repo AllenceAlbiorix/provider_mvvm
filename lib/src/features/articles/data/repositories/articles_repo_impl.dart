@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/network/error/exceptions.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/network/error/failures.dart';
 import 'package:mvvm_provider_ny_times_app/src/features/articles/data/data_sources/remote/articles_impl_api.dart';
@@ -14,6 +15,7 @@ class ArticlesRepositoryImpl extends AbstractArticlesRepository {
   // Gent Ny Times Articles
   @override
   Future<Either<Failure, List<ArticleModel>>> getArticles(ArticlesParams params) async {
+    debugPrint("Called this time");
     try {
       final result = await articlesApi.getArticles(params);
       return Right(result.results ?? []);

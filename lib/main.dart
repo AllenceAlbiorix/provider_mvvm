@@ -24,11 +24,14 @@ void main() async {
   // Inject all dependencies
   await initInjections();
 
-  runApp(DevicePreview(
-    builder: (context) {
-      return const App();
-    },
-    enabled: false,
+  runApp(ChangeNotifierProvider(
+    create: (_) => AppNotifier(),
+    child: DevicePreview(
+      builder: (context) {
+        return const App();
+      },
+      enabled: false,
+    ),
   ));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -72,8 +75,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             create: (_) =>
                 ArticlesNotifier(articlesRepository: sl<AbstractArticlesRepository>()))
       ],
-      child: ChangeNotifierProvider(
-        create: (_) => AppNotifier(),
+      child: ChangeNotifierProvider<AppNotifier>.value(
+        builder: (context, child) => child!,
+        value: context.read<AppNotifier>(),
         child: Consumer<AppNotifier>(
           builder: (context, value, child) {
             return ScreenUtilInit(

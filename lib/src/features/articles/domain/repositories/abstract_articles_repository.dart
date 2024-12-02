@@ -4,7 +4,7 @@ import 'package:mvvm_provider_ny_times_app/src/features/articles/domain/models/a
 import 'package:mvvm_provider_ny_times_app/src/features/articles/domain/models/articles_params.dart';
 
 abstract class AbstractArticlesRepository {
-  // Gent Ny Times Articles
+  // Get Ny Times Articles
   Future<Either<Failure, List<ArticleModel>>> getArticles(
       ArticlesParams params);
 }
