@@ -1,13 +1,11 @@
 # Articles App with using Provider and Dependency Injection
 
-# Medium Articles
+# Clean Architecture in Flutter
 
-[Clean Architecture in Flutter](https://medium.com/@yamen.abd98/clean-architecture-in-flutter-mvvm-bloc-dio-79b1615530e1)
+# Unit Testing with Clean Architecture in Flutter | Mockito
 
-[Unit Testing with Clean Architecture in Flutter | Mockito](https://medium.com/@yamen.abd98/unit-testing-in-flutter-with-clean-architecture-49d403645b4d)
-
-A new Flutter project with Clean Architecture to fetch thw New Work Time
-Articles, display article details, and see more about details from url.
+A new Flutter project with Clean Architecture to fetch the New Work Time
+Articles, display article details, and see more about more information from the url.
 
 ## Getting Started
 
@@ -18,7 +16,7 @@ Articles, display article details, and see more about details from url.
 ## Prerequisites
 
 - Flutter SDK
-    - Supported version (Channel stable, 3.24.3 , Dart version 3.5.3)
+    - Supported version (Channel stable, 3.24.3, Dart version 3.5.3)
 - Android Studio or VS Code
 - Dart plugin for your IDE
 
@@ -41,11 +39,11 @@ Articles, display article details, and see more about details from url.
 
 ![Text Coverage](https://github.com/YAMMEN98/ny-times-flutter-app/blob/main/actions.png)
 
-- Apply Unit Testing .
+- Apply Unit Testing.
 
 ## Built With
 
-- [Flutter](https://github.com/vedranMv/dataDashboard/releases) - The framework used).
+- [Flutter](https://docs.flutter.dev/release/archive) - The framework used).
 - [The New Work a Times API](https://developer.nytimes.com/) - API used for weather data.
 
 ## Unit Test
