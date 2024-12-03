@@ -28,17 +28,13 @@ Articles, display article details, and see more about more information from the 
 
 ## Feature
 
-- Get all ny times articles.
+- Get all NY Times articles.
 - Search articles.
 - Filter article by ```period```
 - Display article details.
 - Apply Dark/Light theme.
 - Apply localization en/ar languages.
-- View Image And Zoom It.
-- Create a lane to generate apk automatically when upload code to the main branch.
-
-![Text Coverage](https://github.com/YAMMEN98/ny-times-flutter-app/blob/main/actions.png)
-
+- View the Image And Zoom It.
 - Apply Unit Testing.
 
 ## Built With
