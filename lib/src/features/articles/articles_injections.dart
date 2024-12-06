@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:ny_times_app/src/core/network/dio_network.dart';
 import 'package:ny_times_app/src/core/utils/injections.dart';
 import 'package:ny_times_app/src/features/articles/data/data_sources/remote/articles_impl_api.dart';

@@ -11,7 +11,8 @@ MediaModel _$MediaModelFromJson(Map<String, dynamic> json) => MediaModel(
       subtype: json['subtype'] as String?,
       caption: json['caption'] as String?,
       copyright: json['copyright'] as String?,
-      approvedForSyndication: json['approved_for_syndication'] as int?,
+      approvedForSyndication:
+          (json['approved_for_syndication'] as num?)?.toInt(),
       mediaMetadata: (json['media-metadata'] as List<dynamic>?)
           ?.map(MediaMetaDataModel.fromJson)
           .toList(),

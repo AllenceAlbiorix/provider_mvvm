@@ -42,6 +42,7 @@ class App extends StatefulWidget {
 
   static void setLocale(BuildContext context, LanguageEnum newLocale) {
     _AppState state = context.findAncestorStateOfType()!;
+    // ignore: invalid_use_of_protected_member
     state.setState(() {
       state.locale = Locale(newLocale.name);
     });

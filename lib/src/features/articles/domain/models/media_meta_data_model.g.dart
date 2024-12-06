@@ -10,8 +10,8 @@ MediaMetaDataModel _$MediaMetaDataModelFromJson(Map<String, dynamic> json) =>
     MediaMetaDataModel(
       url: json['url'] as String?,
       format: json['format'] as String?,
-      height: json['height'] as int?,
-      width: json['width'] as int?,
+      height: (json['height'] as num?)?.toInt(),
+      width: (json['width'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MediaMetaDataModelToJson(MediaMetaDataModel instance) =>

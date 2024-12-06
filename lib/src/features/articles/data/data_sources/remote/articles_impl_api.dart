@@ -4,10 +4,9 @@ import 'package:ny_times_app/src/core/network/error/dio_error_handler.dart';
 import 'package:ny_times_app/src/core/network/error/exceptions.dart';
 import 'package:ny_times_app/src/core/utils/constant/network_constant.dart';
 import 'package:ny_times_app/src/features/articles/data/data_sources/remote/abstract_article_api.dart';
-import 'package:ny_times_app/src/features/articles/domain/models/articles_params.dart';
-import 'package:ny_times_app/src/features/articles/domain/models/article_response_model.dart';
 import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';
-import 'package:ny_times_app/src/features/articles/domain/usecases/articles_usecase.dart';
+import 'package:ny_times_app/src/features/articles/domain/models/article_response_model.dart';
+import 'package:ny_times_app/src/features/articles/domain/models/articles_params.dart';
 
 class ArticlesImplApi extends AbstractArticleApi {
   final DioNetwork dio;
