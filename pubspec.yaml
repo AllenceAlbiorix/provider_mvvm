@@ -101,6 +101,9 @@ dependencies:
   # Generate CSV file and get coverage report
   test_cov_console: ^0.2.2
 
+  #for routing
+  go_router: ^14.6.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

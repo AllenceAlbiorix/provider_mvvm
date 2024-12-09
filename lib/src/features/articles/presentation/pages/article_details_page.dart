@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.dart';
 import 'package:ny_times_app/src/shared/presentation/pages/background_page.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/arrow_back_button_widget.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
@@ -242,10 +244,9 @@ class _NyTimesArticlesPageState extends State<ArticleDetailsPage> {
                           // See more
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(
-                                context,
+                              context.pushNamed(
                                 AppRouteEnum.weViewPage.name,
-                                arguments: widget.model.url,
+                                extra: widget.model.url,
                               );
                             },
                             child: Row(

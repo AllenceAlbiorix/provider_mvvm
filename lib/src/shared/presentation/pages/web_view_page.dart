@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ny_times_app/src/shared/presentation/pages/background_page.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/app_loader.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/arrow_back_button_widget.dart';
@@ -51,14 +52,22 @@ class _WebViewPageState extends State<WebViewPage> {
           SizedBox(
             height: 25.h,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+          Container(
+            color: Colors.red,
+            width: 100,
+            height: 100,
             child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
+              behavior: HitTestBehavior.translucent,
               onTap: () {
-                Navigator.pop(context);
+                GoRouter.of(context).routerDelegate.currentConfiguration.matches.toList();
               },
-              child: ArrowBackButtonWidget(),
+              child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: ArrowBackButtonWidget()),
+                ),
             ),
           ),
           SizedBox(

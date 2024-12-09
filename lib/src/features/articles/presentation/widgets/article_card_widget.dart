@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
 import 'package:ny_times_app/src/core/router/app_route_enum.dart';
 import 'package:ny_times_app/src/core/styles/app_colors.dart';
@@ -10,8 +12,7 @@ import 'package:ny_times_app/src/features/articles/domain/models/article_model.d
 class ArticleCardWidget extends StatefulWidget {
   final ArticleModel nyTimesModel;
 
-  const ArticleCardWidget({Key? key, required this.nyTimesModel})
-      : super(key: key);
+  const ArticleCardWidget({Key? key, required this.nyTimesModel}) : super(key: key);
 
   @override
   State<ArticleCardWidget> createState() => _ArticleCardWidgetState();
@@ -32,12 +33,10 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
     // Check if somethings happened and do not return media
     // If everything seems to be in order we will display the image
     // else display solid circle instead
-    if (widget.nyTimesModel.media != null &&
-        widget.nyTimesModel.media!.isNotEmpty) {
+    if (widget.nyTimesModel.media != null && widget.nyTimesModel.media!.isNotEmpty) {
       if (widget.nyTimesModel.media!.first.mediaMetadata != null &&
           widget.nyTimesModel.media!.first.mediaMetadata!.isNotEmpty) {
-        smallImageUrl =
-            widget.nyTimesModel.media!.first.mediaMetadata!.first.url;
+        smallImageUrl = widget.nyTimesModel.media!.first.mediaMetadata!.first.url;
       }
     }
 
@@ -45,8 +44,7 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
     // Check if somethings happened and do not return media
     // If everything seems to be in order we will display the image
     // else display solid circle instead
-    if (widget.nyTimesModel.media != null &&
-        widget.nyTimesModel.media!.isNotEmpty) {
+    if (widget.nyTimesModel.media != null && widget.nyTimesModel.media!.isNotEmpty) {
       if (widget.nyTimesModel.media!.last.mediaMetadata != null &&
           widget.nyTimesModel.media!.last.mediaMetadata!.isNotEmpty) {
         bigImageUrl = widget.nyTimesModel.media!.last.mediaMetadata!.last.url;
@@ -164,11 +162,14 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
             onPressed: () {
-              Navigator.pushNamed(
-                context,
-                AppRouteEnum.articleDetailsPage.name,
-                arguments: widget.nyTimesModel,
-              );
+              context.pushNamed(AppRouteEnum.articleDetailsPage.name,
+                  extra: widget.nyTimesModel);
+
+              // Navigator.pushNamed(
+              //   context,
+              //   AppRouteEnum.articleDetailsPage.name,
+              //   arguments: widget.nyTimesModel,
+              // );
             },
             icon: Icon(
               Icons.arrow_forward_ios_rounded,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ny_times_app/src/core/helper/helper.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.dart';
 import 'package:ny_times_app/src/core/router/app_route_enum.dart';
 import 'package:ny_times_app/src/core/styles/app_colors.dart';
 
@@ -19,11 +21,12 @@ class _IntroPageState extends State<IntroPage> {
         seconds: 1,
       ),
       () {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          AppRouteEnum.articlesPage.name,
-          (route) => false,
-        );
+        context.replaceNamed(AppRouteEnum.articlesPage.name);
+        // Navigator.pushNamedAndRemoveUntil(
+        //   context,
+        //   AppRouteEnum.articlesPage.path,
+        //   (route) => false,
+        // );
       },
     );
     super.initState();

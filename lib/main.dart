@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.dart';
 import 'package:ny_times_app/src/shared/data/data_sources/app_shared_prefs.dart';
 import 'package:ny_times_app/src/core/router/router.dart';
 import 'package:ny_times_app/src/core/styles/app_theme.dart';
@@ -14,8 +15,8 @@ import 'package:provider/provider.dart';
 
 import 'src/shared/domain/entities/language_enum.dart';
 
-
 final navigatorKey = GlobalKey<NavigatorState>();
+final goRouter = AppGoRouter.goRouter;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -86,26 +87,26 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (context, child) {
-              return MaterialApp(
+              return MaterialApp.router(
                 title: 'Ny Times Articles App',
                 scaffoldMessengerKey: snackBarKey,
-                onGenerateRoute: AppRouter.generateRoute,
                 theme: Helper.isDarkTheme() ? darkAppTheme : appTheme,
                 debugShowCheckedModeBanner: false,
                 locale: locale,
                 builder: DevicePreview.appBuilder,
                 localizationsDelegates: const [
                   S.delegate,
+                  GlobalCupertinoLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
                 ],
-                navigatorKey: navigatorKey,
+                routeInformationProvider: goRouter.routeInformationProvider,
+                routerDelegate: goRouter.routerDelegate,
+                routeInformationParser: goRouter.routeInformationParser,
                 supportedLocales: const [
                   Locale("ar"),
                   Locale("en"),
                 ],
-                home: const IntroPage(),
               );
             },
           );
