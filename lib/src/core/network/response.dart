@@ -22,4 +22,4 @@ class BaseApiResponse<T> with ChangeNotifier {
   }
 }
 
-enum Status { loading, completed, error }
+enum Status { loading, completed, error ,unAuthorized}

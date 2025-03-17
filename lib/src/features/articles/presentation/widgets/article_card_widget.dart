@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvvm_provider_ny_times_app/src/core/styles/app_text_style.dart';
 import 'package:mvvm_provider_ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/router/app_route_enum.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/styles/app_colors.dart';
@@ -97,7 +98,7 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
                 // Title
                 Text(
                   widget.nyTimesModel.title ?? defaultStr,
-                  style: Theme.of(context).textTheme.headlineMedium,
+                  style: AppTextStyle.mediumBlacks(context),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
@@ -113,7 +114,7 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge!
-                      .copyWith(color: AppColors.darkGray),
+                      .copyWith(color: AppColors().darkGray),
                 ),
 
                 // Space
@@ -140,7 +141,7 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
-                            .copyWith(color: AppColors.darkGray),
+                            .copyWith(color: AppColors().darkGray),
                         textAlign: TextAlign.end,
                       ),
                     ),

@@ -53,8 +53,8 @@ class ArticleModel {
       this.media,
       this.etaId});
 
-  factory ArticleModel.fromJson(json) =>
-      _$ArticleModelFromJson(json);
+  factory ArticleModel.fromJson(Map<String, dynamic> json) => _$ArticleModelFromJson(json);
+
 
   toJson() => _$ArticleModelToJson(this);
 

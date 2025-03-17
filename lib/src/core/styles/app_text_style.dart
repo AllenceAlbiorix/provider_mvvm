@@ -69,10 +69,12 @@ class AppTextStyle {
     color: AppColors.white,
   );
 
-  static const mediumWhite = TextStyle(
-      fontSize: AppFontSize.medium,
-      color: AppColors.white,
-      fontWeight: FontWeight.normal);
+  static TextStyle mediumBlacks(BuildContext context) {
+    return TextStyle(
+        fontSize: AppFontSize.medium,
+        color: AppColors().textColor,
+        fontWeight: FontWeight.normal);
+  }
 
   static const largeWhite = TextStyle(
     fontSize: AppFontSize.large,

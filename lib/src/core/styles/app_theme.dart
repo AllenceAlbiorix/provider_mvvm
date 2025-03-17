@@ -43,8 +43,7 @@ final ThemeData appTheme = ThemeData(
       ),
     ),
   ),
-  colorScheme:
-      ColorScheme.fromSwatch().copyWith(secondary: AppColors.primaryColor),
+  colorScheme: ColorScheme.light(brightness: Brightness.light),
   inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColors.transparent,
       contentPadding: EdgeInsets.symmetric(
@@ -66,10 +65,10 @@ final ThemeData appTheme = ThemeData(
 /// Dark theme
 final ThemeData darkAppTheme = ThemeData(
   dialogBackgroundColor: AppColors.primaryColor,
-  cardColor: AppColors.orange.withOpacity(0.5),
+  cardColor: AppColors.orange.withValues(alpha: 0.5),
   appBarTheme: AppBarTheme(
     shadowColor: AppColors.white,
-    color: AppColors.darkGray,
+    color: AppColors().darkGray,
     elevation: 0,
     toolbarTextStyle: const TextTheme(
       titleLarge: AppTextStyle.xxxLargeWhite,
@@ -88,7 +87,6 @@ final ThemeData darkAppTheme = ThemeData(
     titleMedium: AppTextStyle.xSmallWhite,
     titleSmall: AppTextStyle.smallWhite,
     bodyLarge: AppTextStyle.largeWhite,
-    bodyMedium: AppTextStyle.mediumWhite,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -102,8 +100,7 @@ final ThemeData darkAppTheme = ThemeData(
       ),
     ),
   ),
-  colorScheme:
-      ColorScheme.fromSwatch().copyWith(secondary: AppColors.primaryColor),
+  colorScheme: ColorScheme.dark(brightness: Brightness.dark),
   inputDecorationTheme: InputDecorationTheme(
     contentPadding: EdgeInsets.symmetric(
       horizontal: 10.w,

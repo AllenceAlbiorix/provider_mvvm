@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/network/dio_network.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/network/error/exceptions.dart';
+import 'package:mvvm_provider_ny_times_app/src/core/network/web_service.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/utils/constant/network_constant.dart';
 import 'package:mvvm_provider_ny_times_app/src/features/articles/data/data_sources/remote/abstract_article_api.dart';
 import 'package:mvvm_provider_ny_times_app/src/features/articles/data/data_sources/remote/articles_impl_api.dart';
@@ -27,7 +28,7 @@ void main() {
   late AbstractArticleApi articlesApi;
   setUp(() {
     mockDio = MockDioNetwork();
-    articlesApi = ArticlesImplApi(mockDio as DioNetwork);
+    articlesApi = ArticlesImplApi(mockDio as ApiService);
   });
 
   RequestOptions requestOptions = RequestOptions();
