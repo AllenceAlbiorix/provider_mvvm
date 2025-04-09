@@ -5,6 +5,8 @@ import 'package:mvvm_provider_ny_times_app/src/features/articles/articles_inject
 import 'package:mvvm_provider_ny_times_app/src/shared/app_injections.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../network/web_service.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initInjections() async {
@@ -24,5 +26,6 @@ initSharedPrefsInjections() async {
 Future<void> initDioInjections() async {
   initRootLogger();
   sl.registerSingleton<DioNetwork>(DioNetwork());
+  sl.registerSingleton<ApiService>(ApiService());
   // DioNetwork.initDio();
 }

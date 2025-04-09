@@ -15,6 +15,8 @@ import 'package:mvvm_provider_ny_times_app/src/shared/presentation/widgets/text_
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../../../../main.dart';
+
 class ArticlesPage extends StatefulWidget {
   const ArticlesPage({Key? key}) : super(key: key);
 
@@ -56,6 +58,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<AppNotifier>(context);
     return BackgroundPage(
       scaffoldKey: _key,
       withDrawer: true,
@@ -233,6 +236,12 @@ class _ArticlesPageState extends State<ArticlesPage> {
                   ];
                 },
               ),
+              IconButton(
+                icon: Icon( context.watch<AppNotifier>().isDarkMode ? Icons.light_mode : Icons.dark_mode),
+                onPressed: () {
+                  themeProvider.toggleTheme();
+                },
+              ),
             ],
           ),
 
@@ -245,11 +254,11 @@ class _ArticlesPageState extends State<ArticlesPage> {
           Expanded(
             child: Consumer<ArticlesNotifier>(
               builder: (context, state, child) {
-                if (state.response.status == Status.loading) {
+                if (state.articleResponse.status == Status.loading) {
                   return const AppLoader();
-                } else if (state.response.status == Status.error) {
+                } else if (state.articleResponse.status == Status.error) {
                   return ReloadWidget.error(
-                    content: state.response.message ?? "",
+                    content: state.articleResponse.message ?? "",
                     onPressed: () {
                       callArticles();
                     },
@@ -257,7 +266,7 @@ class _ArticlesPageState extends State<ArticlesPage> {
                 }
 
                 // Check if there is no data
-                if ((state.response.data ?? []).isEmpty) {
+                if ((state.articleResponse.data ?? []).isEmpty) {
                   return ReloadWidget.empty(content: S.of(context).no_data);
                 }
 
@@ -271,10 +280,10 @@ class _ArticlesPageState extends State<ArticlesPage> {
                   onRefresh: _onRefresh,
                   onLoading: null,
                   child: ListView.builder(
-                    itemCount: (state.response.data ?? []).length,
+                    itemCount: (state.articleResponse.data ?? []).length,
                     itemBuilder: (context, index) {
                       return ArticleCardWidget(
-                        nyTimesModel: state.response.data![index],
+                        nyTimesModel: state.articleResponse.data![index],
                       );
                     },
                   ),

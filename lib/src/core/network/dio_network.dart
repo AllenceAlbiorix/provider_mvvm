@@ -8,12 +8,11 @@ import 'package:mvvm_provider_ny_times_app/src/core/helper/helper.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/utils/log/app_logger.dart';
 
 class DioNetwork with DioMixin implements Dio {
-  DioNetwork(){
-    this.httpClientAdapter= HttpClientAdapter();
+  DioNetwork() {
+    this.httpClientAdapter = HttpClientAdapter();
     this.options = baseOptions(apiUrl);
     this.interceptors.add(loggerInterceptor());
     this.interceptors.add(appQueuedInterceptorsWrapper());
-
   }
 
   static LoggerInterceptor loggerInterceptor() {
@@ -31,10 +30,10 @@ class DioNetwork with DioMixin implements Dio {
   ///__________App__________///
 
   /// App Api Queued Interceptor
-   QueuedInterceptorsWrapper appQueuedInterceptorsWrapper() {
+  QueuedInterceptorsWrapper appQueuedInterceptorsWrapper() {
     return QueuedInterceptorsWrapper(
       onRequest: (RequestOptions options, r) async {
-        Map<String, dynamic> headers = Helper.getHeaders();
+        Map<String, dynamic> headers = await _getHeaders();
 
         if (kDebugMode) {
           print("Headers");
@@ -52,11 +51,19 @@ class DioNetwork with DioMixin implements Dio {
           // onUnexpectedError(handler, error);
         }
       },
-      onResponse: (Response<dynamic> response,
-          ResponseInterceptorHandler handler) async {
+      onResponse: (Response<dynamic> response, ResponseInterceptorHandler handler) async {
         return handler.next(response);
       },
     );
+  }
+
+  static Future<Map<String, dynamic>> _getHeaders() async {
+    final String? token = '';
+    return {
+      'Authorization': token != null ? 'Bearer $token' : '',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
   }
 
   static BaseOptions baseOptions(String url) {

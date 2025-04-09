@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mvvm_provider_ny_times_app/provider_list.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/helper/helper.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/router/router.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/styles/app_theme.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/translations/l10n.dart';
 import 'package:mvvm_provider_ny_times_app/src/core/utils/injections.dart';
-import 'package:mvvm_provider_ny_times_app/src/features/articles/domain/repositories/abstract_articles_repository.dart';
-import 'package:mvvm_provider_ny_times_app/src/features/articles/presentation/notifiers/ArticlesNotifier.dart';
 import 'package:mvvm_provider_ny_times_app/src/features/intro/presentation/pages/intro_page.dart';
 import 'package:mvvm_provider_ny_times_app/src/shared/data/data_sources/app_shared_prefs.dart';
 import 'package:provider/provider.dart';
@@ -24,8 +23,10 @@ void main() async {
   // Inject all dependencies
   await initInjections();
 
-  runApp(ChangeNotifierProvider(
-    create: (_) => AppNotifier(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => AppNotifier()),
+    ],
     child: DevicePreview(
       builder: (context) {
         return const App();
@@ -55,10 +56,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
     WidgetsBinding.instance.addObserver(this);
 
-    if (mounted) {
-      LanguageEnum newLocale = Helper.getLang();
-      context.read<AppNotifier>().setLocale(context, newLocale);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        LanguageEnum newLocale = Helper.getLang();
+        context.read<AppNotifier>().setLocale(context, newLocale);
+      }
+    });
   }
 
   @override
@@ -71,9 +74,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (_) =>
-                ArticlesNotifier(articlesRepository: sl<AbstractArticlesRepository>()))
+        ChangeNotifierProvider(create: (_) => authProvider),
       ],
       child: ChangeNotifierProvider<AppNotifier>.value(
         builder: (context, child) => child!,
@@ -89,7 +90,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                   title: 'Ny Times Articles App',
                   scaffoldMessengerKey: snackBarKey,
                   onGenerateRoute: AppRouter.generateRoute,
-                  theme: Helper.isDarkTheme() ? darkAppTheme : appTheme,
+                  theme: value._isDarkMode ? darkAppTheme : appTheme,
                   debugShowCheckedModeBanner: false,
                   locale: value.locale,
                   builder: DevicePreview.appBuilder,
@@ -115,10 +116,13 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   }
 }
 
-// App notifier for Lang, Theme, ...
 class AppNotifier extends ChangeNotifier {
   late bool darkTheme;
   Locale locale = const Locale("en");
+
+  bool _isDarkMode = false;
+
+  bool get isDarkMode => _isDarkMode;
 
   AppNotifier() {
     _initialise();
@@ -126,7 +130,14 @@ class AppNotifier extends ChangeNotifier {
 
   Future _initialise() async {
     darkTheme = Helper.isDarkTheme();
+    notifyListeners();
+  }
 
+  void toggleTheme() {
+    _isDarkMode = !_isDarkMode;
+    sl<AppSharedPrefs>().setDarkTheme(_isDarkMode);
+    _isDarkMode = Helper.isDarkTheme();
+    debugPrint("Theme toggled: $_isDarkMode"); // ✅ Check if this prints
     notifyListeners();
   }
 

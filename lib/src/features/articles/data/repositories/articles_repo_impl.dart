@@ -18,7 +18,7 @@ class ArticlesRepositoryImpl extends AbstractArticlesRepository {
     debugPrint("Called this time");
     try {
       final result = await articlesApi.getArticles(params);
-      return Right(result.results ?? []);
+      return Right(result );
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));
     } on CancelTokenException catch (e) {

@@ -97,20 +97,26 @@ class MockArticlesImplApi extends _i1.Mock implements _i5.ArticlesImplApi {
       );
 
   @override
-  _i6.Future<_i4.ApiResponse<List<_i7.ArticleModel>>> getArticles(
-          _i8.ArticlesParams? params) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getArticles,
-          [params],
-        ),
-        returnValue: _i6.Future<_i4.ApiResponse<List<_i7.ArticleModel>>>.value(
-            _FakeApiResponse_2<List<_i7.ArticleModel>>(
-          this,
-          Invocation.method(
-            #getArticles,
-            [params],
-          ),
-        )),
-      ) as _i6.Future<_i4.ApiResponse<List<_i7.ArticleModel>>>);
+  // _i6.Future<List<_i7.ArticleModel>> getArticles(
+  //         _i8.ArticlesParams? params) =>
+  //     (super.noSuchMethod(
+  //       Invocation.method(
+  //         #getArticles,
+  //         [params],
+  //       ),
+  //       returnValue: _i6.Future<List<_i7.ArticleModel>>.value(
+  //           _FakeApiResponse_2<List<_i7.ArticleModel>>(
+  //         this,
+  //         Invocation.method(
+  //           #getArticles,
+  //           [params],
+  //         ),
+  //       )),
+  //     ) as _i6.Future<List<_i7.ArticleModel>>);
+
+  Future<List<_i7.ArticleModel>> getArticles(_i8.ArticlesParams params) async {
+    return [
+      _i7.ArticleModel(id: 1, title: "Sample Article"),
+    ]; // ✅ Ensures correct return type
+  }
 }

@@ -32,7 +32,7 @@ void main() {
         () async {
       when(mockApi.getArticles(articlesParams))
           .thenAnswer((realInvocation) async {
-        return actualArticlesFailedOrEmptyListData;
+        return actualArticlesFailedOrEmptyListData.results ?? [];
       });
       var result;
       try {
@@ -46,7 +46,7 @@ void main() {
     test("Get All Articles - Success Case", () async {
       when(mockApi.getArticles(articlesParams))
           .thenAnswer((realInvocation) async {
-        return actualArticlesListData;
+        return actualArticlesListData.results ?? [];
       });
       var result;
       try {
