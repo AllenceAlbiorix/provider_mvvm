@@ -31,10 +31,9 @@ jobs:
 
         - name: Install gdrive CLI
           run: |
-           sudo apt-get install unzip
-           curl -L -o gdrive.zip https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive-linux-x64
-           chmod +x gdrive-linux-x64
-           sudo mv gdrive-linux-x64 /usr/local/bin/gdrive
+           curl -L -o gdrive https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive-linux-x64
+           chmod +x gdrive
+           sudo mv gdrive /usr/local/bin/
         - name: Upload to Google Drive
           env:
             GDRIVE_SERVICE_ACCOUNT: ${{ secrets.GDRIVE_SERVICE_ACCOUNT }}
