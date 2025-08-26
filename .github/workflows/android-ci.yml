@@ -19,7 +19,7 @@ jobs:
         - uses: actions/checkout@v5.0.0
 
         - name: Build Release APK
-          run: flutter build apk --release
+          run: flutter build apk
 
         - name: Upload APK
           uses: actions/upload-artifact@v4.6.2
